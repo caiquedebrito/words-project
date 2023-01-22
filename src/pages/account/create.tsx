@@ -42,7 +42,7 @@ export default function Create() {
         <title>Words Project | Criar conta</title>
       </Head>
       <Flex direction="column" justifyContent="center" align="center" w="100%" h="100vh">
-      <Box maxWidth="360px" w="100%">
+      <Box maxWidth="360px" w="100%" px="4">
         <Heading as="h1" mb="8" textAlign="center">Crie sua conta</Heading>
         <Stack as="form" w="100%" onSubmit={handleSubmit(onSubmit)}>
           <Input type="text" placeholder="Nome" {...register("name")} error={errors.name}/>

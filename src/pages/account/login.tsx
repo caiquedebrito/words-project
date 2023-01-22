@@ -37,7 +37,7 @@ export default function login() {
         <title>Words Project | Login</title>
       </Head>
       <Flex direction="column" justifyContent="center" align="center" w="100%" h="100vh">
-      <Box maxWidth="360px" w="100%">
+      <Box px="4" maxWidth="360px" w="100%">
         <Heading as="h1" mb="8" textAlign="center">Faça login 😉</Heading>
         <Stack spacing="2" as="form" w="100%" onSubmit={handleSubmit(onSubmit)}>
           <Input {...register("email")} type="email" placeholder="Email" error={errors.email}/>
