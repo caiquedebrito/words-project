@@ -1,5 +1,5 @@
 import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Select, VStack } from '@chakra-ui/react'
-import React, { FormEvent, RefObject, useRef, useState } from 'react'
+import React, { FormEvent, useRef, useState } from 'react'
 import { useNewWordModal } from '../contexts/NewWordModal'
 import { useWordList } from '../contexts/WordListContext'
 
@@ -25,6 +25,10 @@ export function NewWordModal() {
       },
       ...wordList
     ])
+
+    setExample("")
+
+    onClose()
   }
 
   return (
@@ -44,8 +48,8 @@ export function NewWordModal() {
               <option value="substantivo">Substantivo</option>
               <option value="adverbio">Advérbio</option>
             </Select>
-            <Input placeholder="Exemplo" as="textarea" h={100} maxH={100} value={example} onChange={e => setExample(e.target.value)}/>
-            <Button type="submit" w="100%" bg="black" color="white" onClick={onClose}>Adicionar</Button>
+            <Input placeholder="Exemplo" as="textarea" max={100} h={100} maxH={100} value={example} onChange={e => setExample(e.target.value)}/>
+            <Button type="submit" w="100%" bg="black" color="white">Adicionar</Button>
           </VStack>
         </ModalBody>
       </ModalContent>
