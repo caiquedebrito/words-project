@@ -1,8 +1,8 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, onIdTokenChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import Router from "next/router";
-import nookies, { setCookie } from "nookies";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { authClient } from "../services/firebaseClient";
+import { createUserWithEmailAndPassword, onIdTokenChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import Router from "next/router"
+import nookies, { setCookie } from "nookies"
+import { createContext, ReactNode, useContext, useEffect, useState } from "react"
+import { authClient } from "../services/firebaseClient"
 
 interface AuthProviderProps {
   children: ReactNode
@@ -30,17 +30,6 @@ const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>()  
 
-  // useEffect(() => {
-  //   return onAuthStateChanged(authClient, async (user) => {
-  //     console.log(user)
-  //     if (!user) {
-  //       console.log("here")
-  //       setUser(null)
-  //       nookies.destroy({}, "words.token")
-  //     }
-  //   })
-  // }, [])
-
   useEffect(() => {
     return onIdTokenChanged(authClient, async (user) => {
       if (!user) {
@@ -50,7 +39,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         })
         return
       } 
-
 
       const { token } = await user.getIdTokenResult()
       setCookie(undefined, "words.token", token, {
@@ -62,17 +50,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     )
   }, [])
 
-  // force refresh the token every 15 seconds
-  // useEffect(() => {
-  //   const handle = setInterval(async () => {
-  //     console.log(`refreshing token...`);
-  //     const user = authClient.currentUser;
-  //     console.log("User: ", user)
-  //     if (user) await user.getIdToken(true);
-  //   }, 20 * 1000);
-  //   return () => clearInterval(handle);
-  // }, []);
-
   const createNewUser = async ({ email, password }: UserCredentials) => {
     try {
       const { user } = await createUserWithEmailAndPassword(authClient, email, password)
@@ -83,6 +60,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         maxAge: 30 * 24 * 60 * 60, // 30 days
         path: "/"
       })
+
       Router.push("/")
     } catch (error) {
       console.log(error)
@@ -96,9 +74,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push("/")
     } catch (error) {
-      console.log(error)
+      alert("Algo de errado aconteceu! :(")
     }
-      
   }
 
   const logout = async () => {
@@ -109,10 +86,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await signOut(authClient)
       Router.push("/account/login")
     } catch (error) {
-      console.log(error)
+      alert("Algo de errado aconteceu! :(")
     }
   }
-
 
   return (
     <AuthContext.Provider value={{ createNewUser, login, user, logout }}>
