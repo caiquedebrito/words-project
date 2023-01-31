@@ -36,4 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 #firebase
-serviceAccountKey.json
+*.log
+firestore.*
+firebase.*
+.firebaserc
