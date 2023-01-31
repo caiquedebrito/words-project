@@ -2,10 +2,11 @@ import { Button, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalH
 import React, { FormEvent, useRef, useState } from 'react'
 import { useNewWordModal } from '../contexts/NewWordModal'
 import { useWordList } from '../contexts/WordListContext'
+import { v4 as uuidV4 } from "uuid"
 
 export function NewWordModal() {
   const { isOpen, onClose } = useNewWordModal()
-  const { wordList, setWordList } = useWordList()
+  const { wordList, setWordList, addWordList, setWord } = useWordList()
 
   const nameRef = useRef<HTMLInputElement>(null)
   const meaningRef = useRef<HTMLInputElement>(null)
@@ -16,8 +17,11 @@ export function NewWordModal() {
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault()
 
+    const id = uuidV4()
+
     setWordList([
       {
+        id,
         name: nameRef.current?.value,
         meaning: meaningRef.current?.value,
         category: categoryRef.current?.value,
@@ -25,6 +29,14 @@ export function NewWordModal() {
       },
       ...wordList
     ])
+
+    setWord({
+      id,
+      name: nameRef.current?.value,
+      meaning: meaningRef.current?.value,
+      category: categoryRef.current?.value,
+      example
+    })
 
     setExample("")
 
