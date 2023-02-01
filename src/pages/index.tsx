@@ -50,7 +50,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
       }
     }
 
-    const { uid, email } = await admin.auth().verifyIdToken(token, false)
+    const { uid, email } = await admin.auth().verifyIdToken(token)
     
     return {
       props: {
