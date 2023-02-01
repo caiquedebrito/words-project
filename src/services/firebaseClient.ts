@@ -11,8 +11,9 @@ let CLIENT_CONFIG: FirebaseOptions = {
   appId: "1:321029034853:web:0af3f33a5695b7ee05078c"
 }
 
-if (!getApps().length)
+if (!getApps().length) {
   initializeApp(CLIENT_CONFIG)
+}
 
 export const firestore = getFirestore()
 export const authClient = getAuth()
