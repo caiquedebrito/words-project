@@ -47,7 +47,6 @@ export function WordListProvider({ children }: WordListProviderProps) {
 
   useEffect(() => {
     if (user) {
-      console.log(user)
       getWordList()
     }
   }, [user])
