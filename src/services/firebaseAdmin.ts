@@ -1,5 +1,5 @@
-process.env.FIREBASE_AUTH_EMULATOR_HOST="localhost:9099"
 import admin, { ServiceAccount } from "firebase-admin"
+import { getAuth } from "firebase-admin/auth"
 
 const serviceAccount: ServiceAccount  = {
   privateKey: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined,
@@ -14,7 +14,10 @@ if (!admin.apps.length){
     admin.initializeApp({
       projectId: process.env.FIREBASE_PROJECT_ID
     })
+    process.env.FIREBASE_AUTH_EMULATOR_HOST="localhost:9099"
+
   }
 }
+const authAdmin = getAuth()
 
-export {admin}
+export { authAdmin }
