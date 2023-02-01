@@ -6,7 +6,7 @@ import nookies from "nookies"
 import Head from "next/head";
 import { WordCard } from "../components/WordCard";
 import { EditWordModal } from "../components/WordCard/EditWordModal";
-import { admin } from "../services/firebaseAdmin";
+import { authAdmin } from "../services/firebaseAdmin";
 
 interface HomeProps {
   user: {
@@ -42,15 +42,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSideP
   try {
     const { "words.token": token } = nookies.get(ctx)
 
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV === "development") {
       return {
-        props: {
-
-        }
+        props: {}
       }
     }
 
-    const { uid, email } = await admin.auth().verifyIdToken(token)
+    const { uid, email } = await authAdmin.verifyIdToken(token)
     
     return {
       props: {
