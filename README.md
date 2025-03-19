@@ -3,6 +3,19 @@
 ## Overview
 The Words Project is a web application built with TypeScript and React. It leverages the Next.js framework and includes several popular libraries such as Chakra UI for UI components, Firebase for backend services, and React Hook Form for form management. The purpose of this project is to help people memorize vocabulary in different languages.
 
+## Screens
+![Image](https://github.com/user-attachments/assets/cbc2c67e-3aee-433e-b8c0-71c200ea7988)
+Login Page
+
+![Image](https://github.com/user-attachments/assets/5a3065fc-3ecc-4c82-8381-dcfa03702c68)
+Signup Page
+
+![Home](https://github.com/user-attachments/assets/c4e7d5f8-dc5e-4912-b517-e5f17c47f315)
+Home Page
+
+![Image](https://github.com/user-attachments/assets/12253243-5004-488b-83ae-44c43a4bd5ed)
+Add Word Page
+
 ## Installation and Setup
 To get started with the project, follow these steps:
 
